@@ -46,6 +46,12 @@ from django.http import Http404
 #         instance.delete()
 #         return Response({"post":"delete post" + str(pk)})
 
+
+#Get all APIs
+class NewsListAPIView(generics.ListAPIView):
+    queryset = News.objects.all()
+    serializer_class = NewsSerializer
+
 #POST method  
 class NewsCreateAPIView(generics.CreateAPIView):
     queryset = News.objects.all()
