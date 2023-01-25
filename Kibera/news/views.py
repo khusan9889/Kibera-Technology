@@ -7,10 +7,14 @@ from rest_framework.response import Response
 from .models import News
 from django.forms import model_to_dict
 from .serializers import NewsSerializer
-from django.http import Http404
+
+#filtering
+from django_filters import rest_framework as filters
+
+
 # Create your views here.
 
-#Более детальное описание
+#Более детальное описание POST,PUT,Delete методов.
 # class NewsAPIView(APIView):
 #     def get(self, request):
 #         n = News.objects.all()
@@ -49,8 +53,15 @@ from django.http import Http404
 
 #Get all APIs
 class NewsListAPIView(generics.ListAPIView):
-    queryset = News.objects.all()
+    queryset = News.objects.all().order_by('-created_date')
     serializer_class = NewsSerializer
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_fields = ('title',)
+
+# class NewsFilterList(generics.ListAPIView):
+#     queryset = News.objects.all()
+#     serializer_class = NewsSerializer
+
 
 #POST method  
 class NewsCreateAPIView(generics.CreateAPIView):
