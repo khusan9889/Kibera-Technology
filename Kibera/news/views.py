@@ -57,6 +57,7 @@ class NewsListAPIView(generics.ListAPIView):
     serializer_class = NewsSerializer
     filter_backends = (filters.DjangoFilterBackend,)
     filterset_fields = ('title',)
+    
 
 # class NewsFilterList(generics.ListAPIView):
 #     queryset = News.objects.all()
